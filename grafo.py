@@ -2,13 +2,17 @@ grafo = [ [1],           # Vizinhos do vértice 0.
           [2, 3],        # Vizinhos do vértice 1.
           [1, 4],        # Vizinhos do vértice 2.
           [0],           # Vizinhos do vértice 3.
-          [1]            # Vizinhos do vértice 4.
+          [1, 5],            # Vizinhos do vértice 4.
+          [5, 6],
+          [7],
+          [6]
         ]
 
 def bfs(grafo=[[]], s=0):
     grafoAlterado = [] #Definição de grafo com o vértice com atributos: vizinhos, visitado, pai e distancia
     for u in grafo:
-        vertice = {'vizinhos': u, 'visitado': False, 'pai': [], 'distancia': 'infinite'} #Preenchimento do grafo alterado para uso no código
+        vertice = {str(grafo.index(u)): u, 'visitado': False, 'pai': [], 'distancia': 'infinite'} #Preenchimento do grafo alterado para uso no código
+        #print(vertice)
         grafoAlterado.append(vertice)
     
     raiz = grafoAlterado[s] #Pega a raiz, com o index de seu vértice como parametro de entrada
@@ -18,8 +22,11 @@ def bfs(grafo=[[]], s=0):
 
     while len(Q) != 0: #Enquanto ter algo em Q
         u = Q.pop(0) #Pega o vértice raiz
-        #print(u)
-        for v in u['vizinhos']: #Para cada um de seus vizinhos
+        grafoNome = grafoAlterado.index(u)
+        print(u)
+        print(grafoNome)
+        for v in u[str(grafoNome)]: #Para cada um de seus vizinhos
+            print(v)
             grafoVizinho = grafoAlterado[v] #Pega a definição com atributo do vizinho
             if not grafoVizinho['visitado']: #Se ainda não foi visitado
                 grafoVizinho['visitado'] = True #Marcado como visitado
