@@ -57,7 +57,7 @@ class Graph:
     def showGraph(self, title, graph):  # Metodo de amostra do grafo
         plt.title(title)  # instacia que representa o titulo
         nx.draw_shell(graph,
-                      nlist=[range(5, 100), range(75)],
+                      nlist=[range(5, 50), range(30)],
                       with_labels=True,
                       font_weight='bold')  # desenha o grafo
         plt.show()  # monstra atraves do matplotlib
@@ -248,7 +248,7 @@ while True:  # Menu
         grafo = input('Escolha entre (Graph1.csv) ou (Graph2.csv): ')
         bfs = Bfs(grafo)  # bfs variavel que recebe bfs com o grafo
         # Usuario escolhe qual será o vertices raiz
-        raiz = int(input('Escolha a raiz (Numero de 0 até 24): '))
+        raiz = int(input('Escolha a raiz (Numero de 0 até '+str(len(bfs.adjacentMatrix)-1)+'): '))
         # Chamada da função de busca que recebe como parametro a raiz
         bfs.busca(raiz)
         bfs.createResultGraph()  # chamada do metodo createResultGraph()
