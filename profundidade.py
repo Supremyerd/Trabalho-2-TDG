@@ -18,12 +18,14 @@ class dfs: #Classe para a busca em profundidade
   def __init__(self, grafo):
     self.grafo = grafo #Inicialização do grafo
     self.tempo = 0 #Inicilização do tempo de processamento
+    self.ordem = [] #Ordem do processamento
 
   def explore(self, u): #Método de exploração
     self.tempo += 1 #Salvo o tempo do inicio do processo
     u['prenumb'] = self.tempo #Tempo antes do processamento
     u['visitado'] = True #Marcado como visitado
     verticeNumber = str(self.grafo.index(u)) #Pega o numero/nome do vértice
+    self.ordem.append(verticeNumber)
     for v in u[verticeNumber]: #Para cada um dos vizinhos do vértice
       verticeVizinho = self.grafo[v] #Pega o vértice com propriedades
       if not verticeVizinho['visitado']: #Se ainda não foi visitado
@@ -54,3 +56,5 @@ for u in busca.grafo: #Exibindo o resultaod final
   print('-------')
   print(u)
   print('-------')
+
+print(busca.ordem)
