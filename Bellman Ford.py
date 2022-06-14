@@ -23,7 +23,7 @@ class Graph:
         dist[src] = 0
        # Todas as arestas |V| - 1 vezes. Um simples mais curto caminho de src para qualquer outro vértice pode ter no máximo |V| - 1 arestas
         for _ in range(self.V - 1):
-            #Atualize o valor dist e o índice pai dos vértices adjacentes de o vértice escolhido. Considere apenas os vértices que ainda estão em fila
+            #Atualiza o valor dist e o índice pai dos vértices adjacentes de o vértice escolhido. Considera apenas os vértices que ainda estão em fila
             for a, b, c in self.graph:
                 if dist[a] != float("Inf") and dist[a] + c < dist[b]:
                         dist[b] = dist[a] + c           
