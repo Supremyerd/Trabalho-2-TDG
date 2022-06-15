@@ -3,7 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import csv
 import datetime
-
+import timeit
 
 class Graph:
     def __init__(self):  # função principal que recebe as variaveis
@@ -125,30 +125,16 @@ class Dfs(Graph):  # Classe para a busca em profundidade
         # parametro edges passado pro resultado
         self.resultGraph.add_edges_from(edges)
 
-    def timeInSeconds(self):
-        # Definição de minutos e segundos
-        startTime = self.startTime.strftime("%M %S")
-        # Pega minuto e segundo que iniciou o processo
-        startTime = [int(startTime[0:2]), int(startTime[3:5])]
-        # Converção de minutos para segundos
-        startTime = ((startTime[0] * 60) + startTime[1])
-
-        # Definição de minutos e segundos
-        endTime = self.endTime.strftime("%M %S")
-        # Pega minuto e segundo que iniciou o processo
-        endTime = [int(endTime[0:2]), int(endTime[3:5])]
-        # Converção de minutos para segundos
-        endTime = (endTime[0] * 60) + endTime[1]
-
+    def ShowTime(self):
         # imprime o tempo total
-        return str(endTime - startTime) + " Segundos de processamento"
+        return str(self.endTime - self.startTime) + " Segundos de processamento"
 
     def busca(self):  # Método de busca
-        self.startTime = datetime.datetime.now()  # define o começo da busca
+        self.startTime = timeit.default_timer()  # define o começo da busca
         for u in self.propNodes:  # Para cada vértice que ainda não foi visitado
             if not u['visitado']:  # verifica se ja foi visitado
                 self.explore(u)  # É explorado
-        self.endTime = datetime.datetime.now()  # define o final da busca
+        self.endTime = timeit.default_timer()  # define o final da busca
 
 
 class Bfs(Graph):  # Classe para a busca em largura
@@ -174,23 +160,9 @@ class Bfs(Graph):  # Classe para a busca em largura
         # PropNodes recebe o proximo vertice na fila
         self.propNodes = grafoComPropriedades
 
-    def timeInSeconds(self):  # Metodo de contagem de tempo
-        # Definição de minutos e segundos
-        startTime = self.startTime.strftime("%M %S")
-        # Pega minuto e segundo que iniciou o processo
-        startTime = [int(startTime[0:2]), int(startTime[3:5])]
-        # Converção de minutos para segundos
-        startTime = ((startTime[0] * 60) + startTime[1])
-
-        # Definição de minutos e segundos
-        endTime = self.endTime.strftime("%M %S")
-        # Pega minuto e segundo que iniciou o processo
-        endTime = [int(endTime[0:2]), int(endTime[3:5])]
-        # Converção de minutos para segundos
-        endTime = (endTime[0] * 60) + endTime[1]
-
-        # imprime o tempo total
-        return str(endTime - startTime) + " Segundos de processamento"
+    def showTime(self):  # Metodo de contagem de tempo
+        
+        return str(self.endTime - self.startTime) + " Segundos de processamento"
 
     def createResultGraph(self):  # Metodo pro resultado
         # contagem de vetices no grafo
@@ -212,7 +184,7 @@ class Bfs(Graph):  # Classe para a busca em largura
         self.resultGraph.add_edges_from(edges)
 
     def busca(self, raiz=0):  # Método de busca
-        self.startTime = datetime.datetime.now()  # define o tempo inicial da busca
+        self.startTime = timeit.default_timer()  # define o tempo inicial da busca
         raiz = self.propNodes[
             raiz]  # Pega a raiz, com o index de seu vértice como parametro de entrada
         # inicializa a raiz que contem vertice que foi vizitado
@@ -237,7 +209,7 @@ class Bfs(Graph):  # Classe para a busca em largura
 
                     Q.append(
                         grafoVizinho)  # Próximo da fila para ser processado
-        self.endTime = datetime.datetime.now()  # define o tempo final da busca
+        self.endTime = timeit.default_timer()  # define o tempo final da busca
 
 
 while True:  # Menu
@@ -265,7 +237,7 @@ while True:  # Menu
                 bfs.showGraph('Depois da busca em largura', bfs.resultGraph)
             elif entrada == 3:  # se for digitado '3' mostrará o tempo de processamento em segundos
                 # mostra o tempo de processamento em segundos
-                print(bfs.timeInSeconds())
+                print(bfs.showTime())
             elif entrada == 4:  # se for digitado '4' mostrará a ordem do vertices
                 print(bfs.ordem)  # mostra a ordem do vertices
             else:
@@ -289,7 +261,7 @@ while True:  # Menu
                               dfs.resultGraph)  # mostra o grafo antes da busca de profundidade
             elif entrada == 3:  # se for digitado '3' mostrará o tempo de processamento em segundos
                 # mostra o tempo de processamento em segundos
-                print(dfs.timeInSeconds())
+                print(dfs.ShowTime())
             elif entrada == 4:  # se for digitado '4' mostrará a mostra a ordem do vertices
                 print(dfs.ordem)  # mostra a ordem do vertices
             else:
