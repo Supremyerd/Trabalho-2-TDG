@@ -41,7 +41,13 @@ def dijkstra(grafo, s):
     while len(Q) != 0:
         u = Q.pop() #Pega o ultimo da lista de busca
         ordem.append(u) #Salva a ordem
-        S.append(u) #Salva na lista de prioridades minimas
+        existe = False
+        for s in S:
+            if s == u:
+                existe = True #Verifica se o vértice ja foi salvo
+
+        if not existe: #Se não ter sido salvo
+            S.append(u) #Salva na lista de prioridades minimas
         uVertexName = str(grafoComPropriedades.index(u)) #Extrai o numero do vértice
         for v in u[uVertexName]: #para cada um dos vizinhos
             vertexV = grafoComPropriedades[v[0]] #propriedade do vértice vizinho
@@ -55,13 +61,13 @@ def dijkstra(grafo, s):
 
 grafoPropriedades, S, ordem = dijkstra(grafoAula, 5)
 
-for vertice in grafoPropriedades:
-    print(vertice)
+#for vertice in grafoPropriedades:
+#    print(vertice)
 
-print('--')
-print(S)
-print('--')
-print(ordem)
+#print('--')
+#print(S)
+#print('--')
+#print(ordem)
 
 for vertice in S:
     print('--')
