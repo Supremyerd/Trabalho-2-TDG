@@ -31,26 +31,26 @@ def dijkstra(grafo, s):
     grafoComPropriedades = [] #Definição de grafo com o vértice com atributos: vizinhos, visitado, pai e distancia
     for u in grafo:
         vertice = {str(grafo.index(u)): u, 'visitado': False, 'pai': [], 'distancia': 9999999999999999} #Preenchimento do grafo alterado para uso no código
-        grafoComPropriedades.append(vertice)
+        grafoComPropriedades.append(vertice) #Salvando o vértice com propriedades
     
-    ordem = []
-    raiz = grafoComPropriedades[s]
-    raiz['distancia'] = 0
-    S = []
-    Q = [raiz]
+    ordem = [] #Ordem de processamento
+    raiz = grafoComPropriedades[s] #Definição da raiz
+    raiz['distancia'] = 0 #Distancia raiz
+    S = [] #Lista minima
+    Q = [raiz] #Lista de busca
     while len(Q) != 0:
-        u = Q.pop()
-        ordem.append(u)
-        S.append(u)
-        uVertexName = str(grafoComPropriedades.index(u))
-        for v in u[uVertexName]:
-            vertexV = grafoComPropriedades[v[0]]
-            if vertexV['distancia'] > u['distancia'] + v[1]:
-                vertexV['distancia'] = u['distancia'] + v[1]
-                vertexV['pai'] = uVertexName
-                Q.append(vertexV)
+        u = Q.pop() #Pega o ultimo da lista de busca
+        ordem.append(u) #Salva a ordem
+        S.append(u) #Salva na lista de prioridades minimas
+        uVertexName = str(grafoComPropriedades.index(u)) #Extrai o numero do vértice
+        for v in u[uVertexName]: #para cada um dos vizinhos
+            vertexV = grafoComPropriedades[v[0]] #propriedade do vértice vizinho
+            if vertexV['distancia'] > u['distancia'] + v[1]: #Se a distancia for maior que a distancia do pai + peso
+                vertexV['distancia'] = u['distancia'] + v[1] #definição da distancia
+                vertexV['pai'] = uVertexName #Definição do pai
+                Q.append(vertexV) #Salvando na lista de busca
 
-    return grafoComPropriedades, S, ordem
+    return grafoComPropriedades, S, ordem #Retorna os vértices com propriedades, a lista de prioridade minima, e a ordem de processamento
 
 
 grafoPropriedades, S, ordem = dijkstra(grafoAula, 5)
