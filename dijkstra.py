@@ -1,3 +1,5 @@
+import utils
+
 grafo = [ [(2, 3), (3, 2)],           # Vizinhos do vértice 0.
           [(1, 10)],        # Vizinhos do vértice 1.
           [(1, 12), (4, 4)],        # Vizinhos do vértice 2.
